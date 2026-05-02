@@ -87,3 +87,41 @@ model Imagens_produto{
 
 }
 
+model Avaliacoes_loja{
+  id Int @id @default(autoincrement())
+  usuario_id Int 
+  usuario Users @relation(fields: [usuario_id],references: [id])
+  loja_id Int
+  loja Lojas @relation(fields: [loja_id],references: [id])
+  nota Int
+  comentario String @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comentarios_avaliacao Comentarios_avaliacao[]
+}
+
+model Avaliacoes_produto{
+  id Int @id @default(autoincrement())
+  usuario_id Int 
+  usuario Users @relation(fields: [usuario_id],references: [id])
+  produto_id Int 
+  produto Produtos @relation(fields: [produto_id], references: [id])
+  nota Int
+  comentario String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comentarios_avaliacao{
+  id Int @id @default(autoincrement())
+  usuario_id Int
+  usuario Users @relation(fields: [usuario_id],references: [id])
+  avaliacao_loja_id Int?
+  avaliacao_loja Avaliacoes_loja? @relation(fields: [avaliacao_loja_id],references: [id])
+  avaliacao_produto_id Int?
+  produto Produtos? @relation(fields: [avaliacao_produto_id],references: [id])
+  conteudo String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
