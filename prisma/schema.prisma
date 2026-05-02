@@ -7,6 +7,7 @@
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
+  moduleFormat = "commonjs"
 }
 
 datasource db {
@@ -14,7 +15,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model Usuarios {
   id Int @id @default(autoincrement())
   userName String @db.VarChar(50)
   nome String @db.VarChar(255)
@@ -34,7 +35,7 @@ model Lojas{
   id Int @id @default(autoincrement())
   nome String @db.VarChar(255)
   usuarioId Int
-  usuario Users @relation(fields: [usuarioId], references: [id])
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
   descricao String? @db.Text
   logo_url String? @db.VarChar(255)
   banner_url String? @db.VarChar(255)
@@ -90,7 +91,7 @@ model Imagens_produto{
 model Avaliacoes_loja{
   id Int @id @default(autoincrement())
   usuario_id Int 
-  usuario Users @relation(fields: [usuario_id],references: [id])
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
   loja_id Int
   loja Lojas @relation(fields: [loja_id],references: [id])
   nota Int
@@ -104,7 +105,7 @@ model Avaliacoes_loja{
 model Avaliacoes_produto{
   id Int @id @default(autoincrement())
   usuario_id Int 
-  usuario Users @relation(fields: [usuario_id],references: [id])
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
   produto_id Int 
   produto Produtos @relation(fields: [produto_id], references: [id])
   nota Int
@@ -116,7 +117,7 @@ model Avaliacoes_produto{
 model Comentarios_avaliacao{
   id Int @id @default(autoincrement())
   usuario_id Int
-  usuario Users @relation(fields: [usuario_id],references: [id])
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
   avaliacao_loja_id Int?
   avaliacao_loja Avaliacoes_loja? @relation(fields: [avaliacao_loja_id],references: [id])
   avaliacao_produto_id Int?
