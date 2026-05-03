@@ -18,6 +18,9 @@ export class UsuariosService {
             where:{
                 id: id
             }
+            // select:{
+            //     lojas: true
+            // }
         })
 
         if(!user){

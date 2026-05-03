@@ -1,3 +1,5 @@
+
+
 export class CreatUsuariosDTO{
     readonly userName!: string;
     readonly nome!: string;
