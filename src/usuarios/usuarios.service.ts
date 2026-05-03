@@ -3,11 +3,16 @@ import { Prisma } from '../../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
 import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
+import { HashingServiceProtocol } from '../autenticacao/hash/hashing.service';
 
 @Injectable()
 export class UsuariosService {
-    constructor(private prismaService:PrismaService){}
+    constructor(
+        private prismaService:PrismaService,
+        private readonly hashingService: HashingServiceProtocol
+    ){}
     
+
     async list_all(){
         const allTasks= await this.prismaService.usuarios.findMany()
         return allTasks;
@@ -32,12 +37,13 @@ export class UsuariosService {
     }
 
     async create(createUsuarioDTO: CreatUsuariosDTO){
+        const passwordHash=await this.hashingService.hash(createUsuarioDTO.senha_hash)
         const newUsuario= await this.prismaService.usuarios.create({
             data:{
                 userName: createUsuarioDTO.userName,
                 nome: createUsuarioDTO.nome,
                 email: createUsuarioDTO.email,
-                senha_hash: createUsuarioDTO.senha_hash,
+                senha_hash: passwordHash,
                 foto_perfil_url: createUsuarioDTO.foto_perfil_url,
             }
         })
