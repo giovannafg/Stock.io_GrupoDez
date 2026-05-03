@@ -1,5 +1,7 @@
-import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
+import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
+import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -7,27 +9,27 @@ export class UsuariosController {
 
     @Get()
     getAllUsers(){
-        return this.usuariosService.List_all()
+        return this.usuariosService.list_all()
     }
 
     @Post()
-    creat(){
-        return "adicionar no banco um"
+    creat(@Body() createUser: CreatUsuariosDTO){
+        return this.usuariosService.create(createUser)
     }
 
     @Get("/:id")
     getById(@Param('id')id:string){
-        return "adicionando pelo id"
+        return this.usuariosService.getoOneById(Number(id))
     }
 
     @Patch("/:id")
-    attById(@Param('id')id:string){
-        return "att user"
+    updateById(@Param('id')id:string, @Body() updateUser : UpdateUsuariosDto){
+        return this.usuariosService.update(Number(id), updateUser)
     }
 
     @Delete("/:id")
     deleteById(@Param('id')id:string){
-        return "Deletando user"
+        return this.usuariosService.delete(Number(id))
     }
 
 }

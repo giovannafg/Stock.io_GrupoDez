@@ -1,4 +1,8 @@
 export class CreatUsuariosDTO{
-    readonly name!: string;
-    // falta adicionar
+    readonly userName!: string;
+    readonly nome!: string;
+    readonly email!: string;
+    readonly senha_hash!: string;
+    readonly foto_perfil_url? : string;
+
 }
