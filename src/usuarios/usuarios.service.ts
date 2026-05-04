@@ -51,6 +51,7 @@ export class UsuariosService {
     }
 
     async update(id :number, updateUser : UpdateUsuariosDto){
+
         const findUser = await this.prismaService.usuarios.findFirst({
             where:{
                 id: id
@@ -60,14 +61,23 @@ export class UsuariosService {
             throw new HttpException("essa tarefa n existe", HttpStatus.NOT_FOUND)
         }
 
+        const dataUser: { nome?: string, passwordHash?: string}={
+            nome:updateUser.nome ? updateUser.nome : findUser.nome
+        }
+
+        if(updateUser.senha_hash){
+            const passwordHash=await this.hashingService.hash(updateUser.senha_hash)
+            dataUser['passwordHash']=passwordHash
+        }
+
         const userUpdated= await this.prismaService.usuarios.update({
             where: {
                 id : id
             }, data: {
-                nome: updateUser.nome,
+                nome: dataUser.nome,
                 email: updateUser.email,
                 userName: updateUser.userName,
-                senha_hash: updateUser.senha_hash,
+                senha_hash: dataUser.passwordHash ? dataUser.passwordHash : findUser.senha_hash,
                 foto_perfil_url: updateUser.foto_perfil_url
             }
         })
