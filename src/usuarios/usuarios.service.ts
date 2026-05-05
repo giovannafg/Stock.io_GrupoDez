@@ -4,6 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
 import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
 import { HashingServiceProtocol } from '../autenticacao/hash/hashing.service';
+import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
 
 @Injectable()
 export class UsuariosService {
@@ -50,7 +51,7 @@ export class UsuariosService {
         return newUsuario
     }
 
-    async update(id :number, updateUser : UpdateUsuariosDto){
+    async update(id :number, updateUser : UpdateUsuariosDto, tokenPayload: PayloadTokenDto){
 
         const findUser = await this.prismaService.usuarios.findFirst({
             where:{
@@ -58,7 +59,11 @@ export class UsuariosService {
             }
         })
         if(!findUser){
-            throw new HttpException("essa tarefa n existe", HttpStatus.NOT_FOUND)
+            throw new HttpException("esse user n existe", HttpStatus.NOT_FOUND)
+        }
+
+        if(findUser.id !== tokenPayload.sub){
+            throw new HttpException("Usuario n autorizado", HttpStatus.FORBIDDEN)
         }
 
         const dataUser: { nome?: string, passwordHash?: string}={
