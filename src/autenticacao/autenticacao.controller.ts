@@ -8,6 +8,7 @@ export class AutenticacaoController {
         private readonly autenticacaoService:AutenticacaoService
     ){}
 
+    //rota do login
     @Post()
     login(@Body() logindto: LoginDTO){
         return this.autenticacaoService.logar(logindto)

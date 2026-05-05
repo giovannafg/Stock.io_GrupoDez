@@ -12,6 +12,7 @@ import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
 export class UsuariosController {
     constructor(private readonly usuariosService: UsuariosService){}
 
+    
     @Get()
     getAllUsers(){
         return this.usuariosService.list_all()
@@ -30,7 +31,6 @@ export class UsuariosController {
     @UseGuards(AutenticacaoGuard)
     @Patch("/:id")
     updateById(@Param('id')id:string, @Body() updateUser : UpdateUsuariosDto,
-    // @Req() req: Request ->testando uma requisicao feita pelo controller
     @TokenPayloadParam() tokenPayload: PayloadTokenDto
     ){
         // console.log('pauload:' , tokenPayload)

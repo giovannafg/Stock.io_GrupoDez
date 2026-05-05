@@ -1,6 +1,7 @@
 import { HashingServiceProtocol } from "./hashing.service";
 import * as bcrypt from 'bcryptjs'
 
+//Cria e compara a senha criptografada
 export class BscryptService extends HashingServiceProtocol{
     async hash(password: string): Promise<string> {
         const salt =await bcrypt.genSalt();

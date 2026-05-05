@@ -5,6 +5,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { UsuariosModule } from '../usuarios/usuarios.module';
 import { AutenticacaoModule } from '../autenticacao/autenticacao.module';
 
+
+
 @Module({
   imports: [UsuariosModule, AutenticacaoModule],
   controllers: [AppController],

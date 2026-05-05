@@ -29,12 +29,12 @@ export class AutenticacaoService {
         })
 
         if(!user){
-            // console.log("erro")
+            // caso n ache um email valido
             throw new HttpException("Falha ao fazer login", HttpStatus.UNAUTHORIZED)
         }
 
+        //senha errada
         const validacao= await this.AutenticacaoService.compare(login.senha,user.senha_hash)
-        // console.log(validacao)
         if(!validacao){
             throw new HttpException("Falha ao fazer login", HttpStatus.UNAUTHORIZED)
         }
@@ -52,6 +52,7 @@ export class AutenticacaoService {
             }
         )
 
+        
         return {"email": user.email , "nome" : user.nome , "senha": user.senha_hash, "token": token}
     }
 }
