@@ -38,17 +38,27 @@ export class UsuariosService {
     }
 
     async create(createUsuarioDTO: CreatUsuariosDTO){
-        const passwordHash=await this.hashingService.hash(createUsuarioDTO.senha_hash)
-        const newUsuario= await this.prismaService.usuarios.create({
-            data:{
+        const existingUser = await this.prismaService.usuarios.findFirst({
+            where: {
+                email: createUsuarioDTO.email,
+            },
+        });
+
+        if (existingUser) {
+            throw new HttpException('Email já cadastrado', HttpStatus.CONFLICT);
+        }
+
+        const passwordHash = await this.hashingService.hash(createUsuarioDTO.senha_hash);
+        const newUsuario = await this.prismaService.usuarios.create({
+            data: {
                 userName: createUsuarioDTO.userName,
                 nome: createUsuarioDTO.nome,
                 email: createUsuarioDTO.email,
                 senha_hash: passwordHash,
                 foto_perfil_url: createUsuarioDTO.foto_perfil_url,
-            }
-        })
-        return newUsuario
+            },
+        });
+        return newUsuario;
     }
 
     async update(id :number, updateUser : UpdateUsuariosDto, tokenPayload: PayloadTokenDto){
