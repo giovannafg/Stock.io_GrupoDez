@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+
+//Estrutura do banco de dados prisma, sempre gerar dnv quando mudar
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  moduleFormat = "commonjs"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuarios {
+  id Int @id @default(autoincrement())
+  userName String @db.VarChar(50)
+  nome String @db.VarChar(255)
+  email String @db.VarChar(255)
+  senha_hash String @db.VarChar(255)
+  foto_perfil_url String? @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lojas Lojas[] 
+  avaliacoes_loja Avaliacoes_loja[]
+  avaliacoes_produtos Avaliacoes_produto[]
+  comentarios_avaliacao Comentarios_avaliacao[]
+}
+
+model Lojas{
+  id Int @id @default(autoincrement())
+  nome String @db.VarChar(255)
+  usuarioId Int
+  usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  descricao String? @db.Text
+  logo_url String? @db.VarChar(255)
+  banner_url String? @db.VarChar(255)
+  sticker_url String? @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  produtos Produtos[]
+  avaliacoes_loja Avaliacoes_loja[]
+  
+}
+
+
+
+model Categorias{
+  id Int @id @default(autoincrement())
+  nome String @db.VarChar(100)
+  categoria_pai_id Int?
+
+  categoria_pai  Categorias?  @relation("CategoriaHierarquia", fields: [categoria_pai_id], references: [id])
+  subcategorias  Categorias[] @relation("CategoriaHierarquia")
+
+  produtos Produtos[]
+}
+
+model Produtos{
+  id Int @id @default(autoincrement())
+  loja_id Int
+  loja Lojas @relation(fields: [loja_id],references: [id])
+  categoria_id Int
+  categoria Categorias @relation(fields: [categoria_id], references: [id])
+  nome String @db.VarChar(255)
+  descricao String? @db.Text
+  preco Decimal @db.Decimal(10,2)
+  estoque Int 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  imagens_produto Imagens_produto[]
+  avaliacoes_produto Avaliacoes_produto[]
+  comentarios_avaliacao Comentarios_avaliacao[]
+}
+
+model Imagens_produto{
+  id Int @id @default(autoincrement())
+  produto_id Int 
+  produto Produtos @relation(fields: [produto_id],references: [id])
+  url_imagem String @db.VarChar(255)
+  ordem Int
+
+}
+
+model Avaliacoes_loja{
+  id Int @id @default(autoincrement())
+  usuario_id Int 
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
+  loja_id Int
+  loja Lojas @relation(fields: [loja_id],references: [id])
+  nota Int
+  comentario String @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  comentarios_avaliacao Comentarios_avaliacao[]
+}
+
+model Avaliacoes_produto{
+  id Int @id @default(autoincrement())
+  usuario_id Int 
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
+  produto_id Int 
+  produto Produtos @relation(fields: [produto_id], references: [id])
+  nota Int
+  comentario String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comentarios_avaliacao{
+  id Int @id @default(autoincrement())
+  usuario_id Int
+  usuario Usuarios @relation(fields: [usuario_id],references: [id])
+  avaliacao_loja_id Int?
+  avaliacao_loja Avaliacoes_loja? @relation(fields: [avaliacao_loja_id],references: [id])
+  avaliacao_produto_id Int?
+  produto Produtos? @relation(fields: [avaliacao_produto_id],references: [id])
+  conteudo String? @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
