@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ProdutosService } from './produtos.service';
@@ -20,8 +21,11 @@ export class ProdutosController {
   constructor(private readonly produtosService: ProdutosService) {}
 
   @Get()
-  getAllProdutos() {
-    return this.produtosService.list_all();
+  getAllProdutos(
+    @Query('search') search?: string,
+    @Query('categoria_id') categoria_id?: string,
+  ) {
+    return this.produtosService.list_all(search, categoria_id ? Number(categoria_id) : undefined);
   }
 
   @Get('/loja/:lojaId')

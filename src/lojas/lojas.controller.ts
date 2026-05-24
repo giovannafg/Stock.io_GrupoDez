@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { LojasService } from './lojas.service';
@@ -20,8 +21,8 @@ export class LojasController {
   constructor(private readonly lojasService: LojasService) {}
 
   @Get()
-  getAllLojas() {
-    return this.lojasService.list_all();
+  getAllLojas(@Query('search') search?: string) {
+    return this.lojasService.list_all(search);
   }
 
   @Get('/usuario/:usuarioId')

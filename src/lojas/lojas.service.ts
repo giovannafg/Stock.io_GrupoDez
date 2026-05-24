@@ -8,8 +8,18 @@ import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
 export class LojasService {
   constructor(private prismaService: PrismaService) {}
 
-  async list_all() {
+  async list_all(search?: string) {
+    const where: any = {};
+
+    if (search) {
+      where.OR = [
+        { nome: { contains: search, mode: 'insensitive' } },
+        { descricao: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+
     const allLojas = await this.prismaService.lojas.findMany({
+      where,
       include: {
         usuario: true,
         produtos: true,
