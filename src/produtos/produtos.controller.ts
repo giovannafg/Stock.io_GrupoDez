@@ -47,6 +47,11 @@ export class ProdutosController {
     return this.produtosService.create(createProduto, tokenPayload);
   }
 
+  @Get('/menor-preco')
+  getProdutosMenorPreco() {
+    return this.produtosService.getProdutosMenorPreco();
+  }
+
   @Get('/:id')
   getById(@Param('id') id: string) {
     return this.produtosService.getOneById(Number(id));
@@ -70,4 +75,6 @@ export class ProdutosController {
   ) {
     return this.produtosService.delete(Number(id), tokenPayload);
   }
+
+
 }

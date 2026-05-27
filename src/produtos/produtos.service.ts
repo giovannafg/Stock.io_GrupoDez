@@ -272,4 +272,19 @@ export class ProdutosService {
 
     return deletedProduto;
   }
+
+  async getProdutosMenorPreco() {
+    const produtos = await this.prismaService.produtos.findMany({
+      orderBy: {
+        preco: 'asc',
+      },
+      include: {
+        loja: true,
+        categoria: true,
+        imagens_produto: true,
+        avaliacoes_produto: true,
+      },
+    });
+    return produtos;
+  }
 }
