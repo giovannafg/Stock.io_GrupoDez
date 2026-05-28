@@ -22,10 +22,28 @@ export class LojasService {
       where,
       include: {
         usuario: true,
-        produtos: true,
+        produtos: {
+          include: {
+            categoria: {
+              include: {
+                categoria_pai: true,
+              },
+            },
+          },
+          take: 1,
+        },
       },
     });
-    return allLojas;
+    return allLojas.map((loja) => ({
+      id: loja.id,
+      nome: loja.nome,
+      categoria: loja.produtos[0]?.categoria.categoria_pai?.nome || 'Sem categoria',
+      descricao: loja.descricao,
+      logo: loja.logo_url,
+      banner_url: loja.banner_url,
+      sticker_url: loja.sticker_url,
+      usuarioId: loja.usuarioId,
+    }));
   }
 
   async getOneById(id: number) {

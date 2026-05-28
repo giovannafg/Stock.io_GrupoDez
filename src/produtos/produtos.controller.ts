@@ -52,6 +52,11 @@ export class ProdutosController {
     return this.produtosService.getProdutosMenorPreco();
   }
 
+  @Get('/recem-add')
+  getProdutosRecemAdd() {
+    return this.produtosService.getProdutosRecemAdd();
+  }
+
   @Get('/:id')
   getById(@Param('id') id: string) {
     return this.produtosService.getOneById(Number(id));

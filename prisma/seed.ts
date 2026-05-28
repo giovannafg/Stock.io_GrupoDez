@@ -35,12 +35,11 @@ async function main() {
 
   // Lojas (usuarioId: 1 — ajusta para um id que existe no seu banco)
   await Promise.all([
-    prisma.lojas.upsert({ where: { id: 1 }, update: {}, create: { id: 1, nome: 'TechStore',  usuarioId: 1, descricao: 'Loja de eletrônicos',  logo_url: '/lojas/loja1.png' } }),
+    prisma.lojas.upsert({ where: { id: 1 }, update: {}, create: { id: 1, nome: 'Cjr',  usuarioId: 1, descricao: 'Loja de eletrônicos',  logo_url: '/lojas/loja1.svg' } }),
     prisma.lojas.upsert({ where: { id: 2 }, update: {}, create: { id: 2, nome: 'GadgetShop', usuarioId: 1, descricao: 'Gadgets e acessórios', logo_url: '/lojas/loja2.png' } }),
     prisma.lojas.upsert({ where: { id: 3 }, update: {}, create: { id: 3, nome: 'MegaTech',   usuarioId: 1, descricao: 'Tecnologia em geral',  logo_url: '/lojas/loja3.png' } }),
     prisma.lojas.upsert({ where: { id: 4 }, update: {}, create: { id: 4, nome: 'FashionHub', usuarioId: 1, descricao: 'Moda e estilo',        logo_url: '/lojas/loja4.png' } }),
     prisma.lojas.upsert({ where: { id: 5 }, update: {}, create: { id: 5, nome: 'BeautyShop', usuarioId: 1, descricao: 'Produtos de beleza',   logo_url: '/lojas/loja5.png' } }),
-    prisma.lojas.upsert({ where: { id: 6 }, update: {}, create: { id: 6, nome: 'GameZone',   usuarioId: 1, descricao: 'Games e consoles',     logo_url: '/lojas/loja6.png' } }),
   ])
 
   console.log('✅ Lojas criadas')
@@ -50,7 +49,6 @@ async function main() {
     // Celulares (categoria_id: 9)
     prisma.produtos.upsert({ where: { id: 1  }, update: {}, create: { id: 1,  loja_id: 1, categoria_id: 9,  nome: 'Iphone 15',       descricao: 'Apple Iphone 15',          preco: 4769.10,  estoque: 3 } }),
     prisma.produtos.upsert({ where: { id: 2  }, update: {}, create: { id: 2,  loja_id: 1, categoria_id: 9,  nome: 'Iphone 16',       descricao: 'Apple Iphone 16',          preco: 5999.99,  estoque: 0 } }),
-    prisma.produtos.upsert({ where: { id: 3  }, update: {}, create: { id: 3,  loja_id: 2, categoria_id: 9,  nome: 'Samsung S25',     descricao: 'Samsung Galaxy S25',       preco: 4598.99,  estoque: 5 } }),
     prisma.produtos.upsert({ where: { id: 4  }, update: {}, create: { id: 4,  loja_id: 2, categoria_id: 9,  nome: 'S25 Ultra',       descricao: 'Samsung Galaxy S25 Ultra', preco: 5769.10,  estoque: 2 } }),
 
     // Notebooks (categoria_id: 10)
