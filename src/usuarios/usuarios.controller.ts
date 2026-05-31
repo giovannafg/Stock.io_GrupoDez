@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
 import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
@@ -34,7 +34,15 @@ export class UsuariosController {
     @TokenPayloadParam() tokenPayload: PayloadTokenDto
     ){
         // console.log('pauload:' , tokenPayload)
+        console.log("entrei aq")
+        return this.usuariosService.update(Number(id), updateUser, tokenPayload)
+    }
 
+    @UseGuards(AutenticacaoGuard)
+    @Put("/:id")
+    updateByIdPut(@Param('id')id:string, @Body() updateUser : UpdateUsuariosDto,
+    @TokenPayloadParam() tokenPayload: PayloadTokenDto
+    ){
         return this.usuariosService.update(Number(id), updateUser, tokenPayload)
     }
 

@@ -356,4 +356,34 @@ export class ProdutosService {
     });
     return subcategorias;
   }
+
+  async getProdutosByUsuarioId(usuarioId: number) {
+    const produtos = await this.prismaService.produtos.findMany({
+      where: {
+        loja: {
+          usuarioId: usuarioId,
+        },
+      },
+      include: {
+        loja: true,
+        categoria: true,
+        imagens_produto: {
+          take: 1,
+          orderBy: {
+            ordem: 'asc',
+          },
+        },
+      },
+    });
+    return produtos.map((produto) => ({
+      id: produto.id,
+      nome: produto.nome,
+      preco: produto.preco,
+      imagem: produto.imagens_produto[0]?.url_imagem || null,
+      loja_nome: produto.loja.nome,
+      loja_logo: produto.loja.logo_url,
+      subcategoria_nome: produto.categoria.nome,
+      estoque: produto.estoque,
+    }));
+  }
 }

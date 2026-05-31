@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
+import type { Response } from 'express';
 import { LoginDTO } from './dto/login.dto';
 import { AutenticacaoService } from './autenticacao.service';
 
@@ -12,5 +13,11 @@ export class AutenticacaoController {
     @Post()
     login(@Body() logindto: LoginDTO){
         return this.autenticacaoService.logar(logindto)
+    }
+
+    @Post('/logout')
+    logout(@Res() res: Response) {
+    res.clearCookie('token')
+    return res.json({ ok: true })
     }
 }

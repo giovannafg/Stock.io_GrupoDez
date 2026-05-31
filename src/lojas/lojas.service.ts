@@ -199,6 +199,10 @@ export class LojasService {
       },
     });
 
-    return lojas;
+    return lojas.map((loja) => ({
+      id: loja.id,
+      nome: loja.nome,
+      logo: loja.logo_url,
+    }));
   }
 }

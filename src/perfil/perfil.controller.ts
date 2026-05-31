@@ -12,7 +12,7 @@ export class PerfilController {
     @UseGuards(AutenticacaoGuard)
     async getPerfil(@Req() req: Request){
         const payload=req[REQUEST_TOKEN_PAYLOAD_NAME]
-        console.log('payload:', payload)
+        // console.log('payload:', payload)
         return this.perfilService.getPerfil(payload.sub)
     }
 }

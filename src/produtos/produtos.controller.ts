@@ -33,6 +33,11 @@ export class ProdutosController {
     return this.produtosService.getProdutosByLojaId(Number(lojaId));
   }
 
+  @Get('/usuario/:usuarioId')
+  getProdutosByUsuario(@Param('usuarioId') usuarioId: string) {
+    return this.produtosService.getProdutosByUsuarioId(Number(usuarioId));
+  }
+
   @Get('/categoria/:categoria')
   getProdutosByCategoria(@Param('categoriaId') categoria: string) {
     // console.log('categoria recebida:', categoria);
