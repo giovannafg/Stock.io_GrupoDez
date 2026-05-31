@@ -5,6 +5,9 @@ export class CreateLojaDTO {
   @IsString({ message: 'nome must be a string' })
   readonly nome!: string;
 
+  @IsNotEmpty({ message: 'categoria_id is required' })
+  readonly categoria_id!: number;
+
   @IsOptional()
   @IsString({ message: 'descricao must be a string' })
   readonly descricao?: string;

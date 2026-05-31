@@ -35,11 +35,11 @@ async function main() {
 
   // Lojas (usuarioId: 1 — ajusta para um id que existe no seu banco)
   await Promise.all([
-    prisma.lojas.upsert({ where: { id: 1 }, update: {}, create: { id: 1, nome: 'Cjr',  usuarioId: 1, descricao: 'Loja de eletrônicos',  logo_url: '/lojas/loja1.svg' } }),
-    prisma.lojas.upsert({ where: { id: 2 }, update: {}, create: { id: 2, nome: 'GadgetShop', usuarioId: 1, descricao: 'Gadgets e acessórios', logo_url: '/lojas/loja2.png' } }),
-    prisma.lojas.upsert({ where: { id: 3 }, update: {}, create: { id: 3, nome: 'MegaTech',   usuarioId: 1, descricao: 'Tecnologia em geral',  logo_url: '/lojas/loja3.png' } }),
-    prisma.lojas.upsert({ where: { id: 4 }, update: {}, create: { id: 4, nome: 'FashionHub', usuarioId: 1, descricao: 'Moda e estilo',        logo_url: '/lojas/loja4.png' } }),
-    prisma.lojas.upsert({ where: { id: 5 }, update: {}, create: { id: 5, nome: 'BeautyShop', usuarioId: 1, descricao: 'Produtos de beleza',   logo_url: '/lojas/loja5.png' } }),
+    prisma.lojas.upsert({ where: { id: 1 }, update: {}, create: { id: 1, nome: 'Cjr', categoria_id: 1, usuarioId: 1, descricao: 'Loja de eletrônicos',  logo_url: '/lojas/loja1.svg' } }),
+    prisma.lojas.upsert({ where: { id: 2 }, update: {}, create: { id: 2, nome: 'GadgetShop', categoria_id: 1, usuarioId: 1, descricao: 'Gadgets e acessórios', logo_url: '/lojas/loja2.png' } }),
+    prisma.lojas.upsert({ where: { id: 3 }, update: {}, create: { id: 3, nome: 'MegaTech', categoria_id: 1, usuarioId: 1, descricao: 'Tecnologia em geral',  logo_url: '/lojas/loja3.png' } }),
+    prisma.lojas.upsert({ where: { id: 4 }, update: {}, create: { id: 4, nome: 'FashionHub', categoria_id: 1, usuarioId: 1, descricao: 'Moda e estilo',        logo_url: '/lojas/loja4.png' } }),
+    prisma.lojas.upsert({ where: { id: 5 }, update: {}, create: { id: 5, nome: 'BeautyShop', categoria_id: 1, usuarioId: 1, descricao: 'Produtos de beleza',   logo_url: '/lojas/loja5.png' } }),
   ])
 
   console.log('✅ Lojas criadas')

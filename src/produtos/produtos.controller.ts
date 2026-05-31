@@ -33,9 +33,15 @@ export class ProdutosController {
     return this.produtosService.getProdutosByLojaId(Number(lojaId));
   }
 
-  @Get('/categoria/:categoriaId')
-  getProdutosByCategoria(@Param('categoriaId') categoriaId: string) {
-    return this.produtosService.getProdutosByCategoriaId(Number(categoriaId));
+  @Get('/categoria/:categoria')
+  getProdutosByCategoria(@Param('categoriaId') categoria: string) {
+    // console.log('categoria recebida:', categoria);
+    return this.produtosService.getProdutosByCategoria(categoria);
+  }
+
+  @Get('/subcategorias/:categoria')
+  getSubcategorias(@Param('categoria') categoria: string) {
+    return this.produtosService.getSubcategorias(categoria);
   }
 
   @UseGuards(AutenticacaoGuard)

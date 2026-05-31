@@ -1,9 +1,12 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateLojaDTO {
   @IsOptional()
   @IsString({ message: 'nome must be a string' })
   readonly nome?: string;
+
+  @IsOptional()
+  readonly categoria_id?: number;
 
   @IsOptional()
   @IsString({ message: 'descricao must be a string' })

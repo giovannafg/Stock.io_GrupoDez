@@ -39,6 +39,11 @@ export class LojasController {
     return this.lojasService.create(createLoja, tokenPayload);
   }
 
+  @Get('/categoria/:categoria')
+  getLojasByCategoria(@Param('categoria') categoria: string) {
+    return this.lojasService.getLojasByCategoria(categoria);
+  }
+
   @Get('/:id')
   getById(@Param('id') id: string) {
     return this.lojasService.getOneById(Number(id));

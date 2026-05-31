@@ -22,22 +22,15 @@ export class LojasService {
       where,
       include: {
         usuario: true,
-        produtos: {
-          include: {
-            categoria: {
-              include: {
-                categoria_pai: true,
-              },
-            },
-          },
-          take: 1,
-        },
+        produtos: true,
+        categoria: true,
       },
     });
+
     return allLojas.map((loja) => ({
       id: loja.id,
       nome: loja.nome,
-      categoria: loja.produtos[0]?.categoria.categoria_pai?.nome || 'Sem categoria',
+      categoria: loja.categoria?.nome || 'Sem categoria',
       descricao: loja.descricao,
       logo: loja.logo_url,
       banner_url: loja.banner_url,
@@ -80,6 +73,7 @@ export class LojasService {
     const newLoja = await this.prismaService.lojas.create({
       data: {
         nome: createLojaDTO.nome,
+        categoria_id: createLojaDTO.categoria_id,
         descricao: createLojaDTO.descricao,
         logo_url: createLojaDTO.logo_url,
         banner_url: createLojaDTO.banner_url,
@@ -93,6 +87,32 @@ export class LojasService {
     });
 
     return newLoja;
+  }
+
+  async getLojasByCategoria(categoria: string) {
+    const lojas = await this.prismaService.lojas.findMany({
+      where: {
+        categoria: {
+          nome: categoria,
+        },
+      },
+      include: {
+        usuario: true,
+        produtos: true,
+        categoria: true,
+      },
+    });
+
+    return lojas.map((loja) => ({
+      id: loja.id,
+      nome: loja.nome,
+      categoria: loja.categoria?.nome || 'Sem categoria',
+      descricao: loja.descricao,
+      logo: loja.logo_url,
+      banner_url: loja.banner_url,
+      sticker_url: loja.sticker_url,
+      usuarioId: loja.usuarioId,
+    }));
   }
 
   async update(

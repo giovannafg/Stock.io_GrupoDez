@@ -70,20 +70,36 @@ export class ProdutosService {
     return produtos;
   }
 
-  async getProdutosByCategoriaId(categoria_id: number) {
+  async getProdutosByCategoria(categoria: string) {
     const produtos = await this.prismaService.produtos.findMany({
       where: {
-        categoria_id: categoria_id,
+        categoria: {
+          categoria_pai: { 
+            nome: categoria,
+          },
+        }
       },
       include: {
-        loja: true,
         categoria: true,
+        loja: true,
         imagens_produto: true,
         avaliacoes_produto: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
-    return produtos;
+    return produtos.map((produto) => ({
+      id: produto.id,
+      nome: produto.nome,
+      imagem: produto.imagens_produto[0]?.url_imagem || null,
+      loja_nome: produto.loja.nome,
+      loja_logo: produto.loja.logo_url,
+      preco: produto.preco,
+      estoque: produto.estoque,
+      subcategoria: produto.categoria.nome,
+    }));
   }
 
   async create(
@@ -287,14 +303,13 @@ export class ProdutosService {
             ordem: 'asc',
           },
         },
-        avaliacoes_produto: true,
       },
     });
     return produtos.map((produto) => ({
       id: produto.id,
       nome: produto.nome,
       preco: produto.preco,
-      imagem: "/produtos/" + produto.imagens_produto[0]?.url_imagem || null,
+      imagem: produto.imagens_produto[0]?.url_imagem || null,
       loja_nome: produto.loja.nome,
       loja_logo: produto.loja.logo_url,
       subcategoria_nome: produto.categoria.nome,
@@ -314,18 +329,31 @@ export class ProdutosService {
             ordem: 'asc',
           },
         },
-        avaliacoes_produto: true,
       },
     });
     return produtos.map((produto) => ({
       id: produto.id,
       nome: produto.nome,
       preco: produto.preco,
-      imagem: "/produtos/" + produto.imagens_produto[0]?.url_imagem || null,
+      imagem: produto.imagens_produto[0]?.url_imagem || null,
       loja_nome: produto.loja.nome,
       loja_logo: produto.loja.logo_url,
       subcategoria_nome: produto.categoria.nome,
       estoque: produto.estoque,
     }));
+  }
+
+  async getSubcategorias(categoria: string) {
+    const subcategorias = await this.prismaService.categorias.findMany({
+      where: {
+        categoria_pai: {
+          nome: categoria,
+        },
+      },
+      select: {
+        nome: true,
+      },
+    });
+    return subcategorias;
   }
 }
