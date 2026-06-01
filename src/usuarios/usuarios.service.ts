@@ -5,6 +5,7 @@ import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
 import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
 import { HashingServiceProtocol } from '../autenticacao/hash/hashing.service';
 import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
+import { AlterarSenhaDTO } from './dto/alterar-senha.dto';
 
 @Injectable()
 export class UsuariosService {
@@ -100,6 +101,41 @@ export class UsuariosService {
         return userUpdated
     }
 
+    async updateSenha(id :number, alterarSenha: AlterarSenhaDTO, tokenPayload: PayloadTokenDto){
+
+        const findUser = await this.prismaService.usuarios.findFirst({
+            where:{
+                id: id
+            }
+        })
+        if(!findUser){
+            throw new HttpException("esse user n existe", HttpStatus.NOT_FOUND)
+        }
+
+        if(findUser.id !== tokenPayload.sub){
+            throw new HttpException("Usuario n autorizado", HttpStatus.FORBIDDEN)
+        }
+
+        findUser.senha_hash
+        const senhaValida = await this.hashingService.compare(alterarSenha.senha_atual, findUser.senha_hash)
+
+        if(!senhaValida){
+            throw new HttpException("Senha atual incorreta", HttpStatus.BAD_REQUEST)
+        }
+
+        if(alterarSenha.nova_senha){
+            const passwordHash=await this.hashingService.hash(alterarSenha.nova_senha)
+            const userUpdated= await this.prismaService.usuarios.update({
+                where: {
+                    id : id
+                }, data: {
+                    senha_hash: passwordHash
+                }
+            })
+            return userUpdated
+        }
+    }
+
     async delete(id: number){
         const findUser = await this.prismaService.usuarios.findFirst({
             where:{
@@ -118,4 +154,5 @@ export class UsuariosService {
 
         return "User deletado"
     }
+
 }

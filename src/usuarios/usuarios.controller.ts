@@ -7,6 +7,7 @@ import type { Request } from 'express';
 import { REQUEST_TOKEN_PAYLOAD_NAME } from '../autenticacao/commom/autenticacao.constants';
 import { TokenPayloadParam } from '../autenticacao/param/token-payload.param';
 import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
+import { AlterarSenhaDTO } from './dto/alterar-senha.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -49,6 +50,14 @@ export class UsuariosController {
     @Delete("/:id")
     deleteById(@Param('id')id:string){
         return this.usuariosService.delete(Number(id))
+    }
+
+    @UseGuards(AutenticacaoGuard)
+    @Patch("/senha/:id")
+    updateSenha(@Param('id')id:string, @Body() alterarSenha: AlterarSenhaDTO,
+    @TokenPayloadParam() tokenPayload: PayloadTokenDto
+    ){
+        return this.usuariosService.updateSenha(Number(id), alterarSenha, tokenPayload)
     }
 
 }

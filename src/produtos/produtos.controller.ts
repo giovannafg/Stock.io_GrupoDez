@@ -39,7 +39,7 @@ export class ProdutosController {
   }
 
   @Get('/categoria/:categoria')
-  getProdutosByCategoria(@Param('categoriaId') categoria: string) {
+  getProdutosByCategoria(@Param('categoria') categoria: string) {
     // console.log('categoria recebida:', categoria);
     return this.produtosService.getProdutosByCategoria(categoria);
   }
