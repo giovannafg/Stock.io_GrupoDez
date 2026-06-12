@@ -8,11 +8,12 @@ import { CategoriasModule } from '../categorias/categorias.module';
 import { LojasModule } from '../lojas/lojas.module';
 import { ProdutosModule } from '../produtos/produtos.module';
 import { PerfilModule } from '../perfil/perfil.module';
+import { ImagensProdutoModule } from '../imagens-produto/imagens-produto.module';
 
 
 
 @Module({
-  imports: [UsuariosModule, AutenticacaoModule, CategoriasModule, LojasModule, ProdutosModule, PerfilModule],
+  imports: [UsuariosModule, AutenticacaoModule, CategoriasModule, LojasModule, ProdutosModule, PerfilModule, ImagensProdutoModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
