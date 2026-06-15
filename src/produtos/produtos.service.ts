@@ -357,6 +357,23 @@ export class ProdutosService {
     return subcategorias;
   }
 
+  async getSubcategoriasPorId(categoria: number) {
+    const subcategorias = await this.prismaService.categorias.findMany({
+      where: {
+        categoria_pai: {
+          id: categoria,
+        },
+      },
+      select: {
+        id: true,
+        nome: true,
+      },
+    });
+    return subcategorias.map((sc) => (
+      {id: sc.id, nome: sc.nome}
+    ));
+  }
+
   async getProdutosByUsuarioId(usuarioId: number) {
     const produtos = await this.prismaService.produtos.findMany({
       where: {

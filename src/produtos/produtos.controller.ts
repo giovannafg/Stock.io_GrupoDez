@@ -49,6 +49,11 @@ export class ProdutosController {
     return this.produtosService.getSubcategorias(categoria);
   }
 
+  @Get('/subcategoria/:categoria')
+  getSubcategoriasPorId(@Param('categoria') categoria:number) {
+    return this.produtosService.getSubcategoriasPorId(categoria);
+  }
+
   @UseGuards(AutenticacaoGuard)
   @Post()
   create(
