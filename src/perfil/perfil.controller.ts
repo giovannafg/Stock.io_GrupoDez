@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
 import { PerfilService } from './perfil.service';
 import { AutenticacaoGuard } from '../autenticacao/guard/autenticacao-token.guard';
 import type { Request } from 'express';
@@ -15,4 +15,9 @@ export class PerfilController {
         // console.log('payload:', payload)
         return this.perfilService.getPerfil(payload.sub)
     }
+
+    @Get(':id')
+    async getPerfilPublico(@Param('id') id: string) {
+    return this.perfilService.getPerfil(Number(id))
+}
 }

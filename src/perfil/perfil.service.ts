@@ -4,6 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 @Injectable()
 export class PerfilService {
     constructor(private prismaService: PrismaService) {}
+    
      async getPerfil(id: number) {
     return this.prismaService.usuarios.findUnique({
       where: { id },
