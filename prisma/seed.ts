@@ -15,10 +15,10 @@ async function main() {
   // ==================== CATEGORIAS PRINCIPAIS ====================
   await Promise.all([
     prisma.categorias.upsert({ where: { id: 1  }, update: {}, create: { id: 1,  nome: 'Mercado'     } }),
-    prisma.categorias.upsert({ where: { id: 2  }, update: {}, create: { id: 2,  nome: 'Farmácia'    } }),
+    prisma.categorias.upsert({ where: { id: 2  }, update: {}, create: { id: 2,  nome: 'Farmacia'    } }),
     prisma.categorias.upsert({ where: { id: 3  }, update: {}, create: { id: 3,  nome: 'Beleza'      } }),
     prisma.categorias.upsert({ where: { id: 4  }, update: {}, create: { id: 4,  nome: 'Moda'        } }),
-    prisma.categorias.upsert({ where: { id: 5  }, update: {}, create: { id: 5,  nome: 'Eletrônicos' } }),
+    prisma.categorias.upsert({ where: { id: 5  }, update: {}, create: { id: 5,  nome: 'Eletronicos' } }),
     prisma.categorias.upsert({ where: { id: 6  }, update: {}, create: { id: 6,  nome: 'Jogos'       } }),
     prisma.categorias.upsert({ where: { id: 7  }, update: {}, create: { id: 7,  nome: 'Brinquedos'  } }),
     prisma.categorias.upsert({ where: { id: 8  }, update: {}, create: { id: 8,  nome: 'Casa'        } }),
@@ -203,6 +203,15 @@ async function main() {
     })
   }
   console.log('✅ Produtos e imagens criados')
+
+  
+  await prisma.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Usuarios"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "Usuarios"))`)
+  await prisma.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Lojas"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "Lojas"))`)
+  await prisma.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Categorias"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "Categorias"))`)
+  await prisma.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Produtos"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "Produtos"))`)
+  await prisma.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Imagens_produto"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "Imagens_produto"))`)
+
+
   console.log('🎉 Seed concluído!')
 }
 
