@@ -74,44 +74,53 @@ async function main() {
   console.log('✅ Usuários criados')
 
 // ==================== LOJAS ====================
+  const bannerMercado     = '/uploads/lojas/mercadobanner.png'
+  const bannerFarmacia    = '/uploads/lojas/farmaciabanner.png'
+  const bannerBeleza      = '/uploads/lojas/belezabanner.png'
+  const bannerModa        = '/uploads/lojas/modabanner.png'
+  const bannerEletronicos = '/uploads/lojas/eletronicosbanner.png'
+  const bannerJogos       = '/uploads/lojas/jogosbanner.png'
+  const bannerBrinquedos  = '/uploads/lojas/brinquedosbanner.png'
+  const bannerCasa        = '/uploads/lojas/casabanner.png'
+ 
   await Promise.all([
     // Mercado
-    prisma.lojas.upsert({ where: { id: 1  }, update: {}, create: { id: 1,  usuarioId: 1, categoria_id: 1, nome: 'BlueBerry Mercado',     descricao: 'Tudo para o seu mercado do dia a dia, com qualidade e preço justo.', logo_url: '/uploads/lojas/BlueBerryMercado.png'     } }),
-    prisma.lojas.upsert({ where: { id: 2  }, update: {}, create: { id: 2,  usuarioId: 2, categoria_id: 1, nome: 'CJR Mercado',           descricao: 'Produtos frescos e variados direto para sua casa.',                  logo_url: '/uploads/lojas/cjrMercado.png'           } }),
-    prisma.lojas.upsert({ where: { id: 3  }, update: {}, create: { id: 3,  usuarioId: 3, categoria_id: 1, nome: 'Mango Mercado',         descricao: 'Seu mercado de confiança, com entrega rápida e bom atendimento.',     logo_url: '/uploads/lojas/mangoMercado.png'         } }),
-    prisma.lojas.upsert({ where: { id: 4  }, update: {}, create: { id: 4,  usuarioId: 4, categoria_id: 1, nome: 'Maumar Mercado',        descricao: 'Variedade de hortifruti, bebidas e padaria em um só lugar.',         logo_url: '/uploads/lojas/maumarMercado.png'        } }),
-    prisma.lojas.upsert({ where: { id: 5  }, update: {}, create: { id: 5,  usuarioId: 5, categoria_id: 1, nome: 'Spicy Mercado',         descricao: 'Produtos selecionados para o seu dia a dia, com preços que cabem no bolso.', logo_url: '/uploads/lojas/spicyMercado.png'         } }),
-    prisma.lojas.upsert({ where: { id: 6  }, update: {}, create: { id: 6,  usuarioId: 1, categoria_id: 1, nome: 'Dog Goods Mercado',     descricao: 'Mercado completo com foco em qualidade e praticidade.',              logo_url: '/uploads/lojas/dogGoodsMercado.png'      } }),
+    prisma.lojas.upsert({ where: { id: 1  }, update: {}, create: { id: 1,  usuarioId: 1, categoria_id: 1, nome: 'BlueBerry',     descricao: 'Tudo para o seu mercado do dia a dia, com qualidade e preço justo.', logo_url: '/uploads/lojas/BlueBerryMercado.png',     banner_url: bannerMercado } }),
+    prisma.lojas.upsert({ where: { id: 2  }, update: {}, create: { id: 2,  usuarioId: 2, categoria_id: 1, nome: 'CJR',           descricao: 'Produtos frescos e variados direto para sua casa.',                  logo_url: '/uploads/lojas/cjrMercado.png',           banner_url: bannerMercado } }),
+    prisma.lojas.upsert({ where: { id: 3  }, update: {}, create: { id: 3,  usuarioId: 3, categoria_id: 1, nome: 'Mango',         descricao: 'Seu mercado de confiança, com entrega rápida e bom atendimento.',     logo_url: '/uploads/lojas/mangoMercado.png',         banner_url: bannerMercado } }),
+    prisma.lojas.upsert({ where: { id: 4  }, update: {}, create: { id: 4,  usuarioId: 4, categoria_id: 1, nome: 'Maumar',        descricao: 'Variedade de hortifruti, bebidas e padaria em um só lugar.',         logo_url: '/uploads/lojas/maumarMercado.png',        banner_url: bannerMercado } }),
+    prisma.lojas.upsert({ where: { id: 5  }, update: {}, create: { id: 5,  usuarioId: 5, categoria_id: 1, nome: 'Spicy',         descricao: 'Produtos selecionados para o seu dia a dia, com preços que cabem no bolso.', logo_url: '/uploads/lojas/spicyMercado.png',         banner_url: bannerMercado } }),
+    prisma.lojas.upsert({ where: { id: 6  }, update: {}, create: { id: 6,  usuarioId: 1, categoria_id: 1, nome: 'Dog Goods',     descricao: 'Mercado completo com foco em qualidade e praticidade.',              logo_url: '/uploads/lojas/dogGoodsMercado.png',      banner_url: bannerMercado } }),
     // Farmácia
-    prisma.lojas.upsert({ where: { id: 7  }, update: {}, create: { id: 7,  usuarioId: 2, categoria_id: 2, nome: 'BeWell Farmácia',       descricao: 'Medicamentos, suplementos e produtos de higiene com entrega rápida.', logo_url: '/uploads/lojas/BeWellFarmacia.png'       } }),
+    prisma.lojas.upsert({ where: { id: 7  }, update: {}, create: { id: 7,  usuarioId: 2, categoria_id: 2, nome: 'BeWell',        descricao: 'Medicamentos, suplementos e produtos de higiene com entrega rápida.', logo_url: '/uploads/lojas/BeWellFarmacia.png',       banner_url: bannerFarmacia } }),
     // Beleza
-    prisma.lojas.upsert({ where: { id: 8  }, update: {}, create: { id: 8,  usuarioId: 3, categoria_id: 3, nome: 'Creamy Skincare Beleza',descricao: 'Cuidados para a pele com produtos selecionados e de qualidade.',     logo_url: '/uploads/lojas/CreamySkincareBeleza.png' } }),
-    prisma.lojas.upsert({ where: { id: 9  }, update: {}, create: { id: 9,  usuarioId: 4, categoria_id: 3, nome: 'Nalu Beleza',           descricao: 'Skincare e maquiagem para realçar sua beleza natural.',              logo_url: '/uploads/lojas/naluBeleza.png'           } }),
-    prisma.lojas.upsert({ where: { id: 10 }, update: {}, create: { id: 10, usuarioId: 5, categoria_id: 3, nome: 'Rare Beauty Beleza',    descricao: 'Maquiagens inclusivas e de alta qualidade para todos os tons de pele.', logo_url: '/uploads/lojas/RareBeatyBeleza.png'      } }),
-    prisma.lojas.upsert({ where: { id: 11 }, update: {}, create: { id: 11, usuarioId: 1, categoria_id: 3, nome: 'Roots Beleza',          descricao: 'Produtos de beleza naturais com foco em ingredientes sustentáveis.',  logo_url: '/uploads/lojas/rootsBeleza.png'          } }),
-    prisma.lojas.upsert({ where: { id: 12 }, update: {}, create: { id: 12, usuarioId: 2, categoria_id: 3, nome: 'Rose Beleza',           descricao: 'Maquiagem e cuidados pessoais com entrega para todo o Brasil.',       logo_url: '/uploads/lojas/RoseBeleza.png'           } }),
-    prisma.lojas.upsert({ where: { id: 13 }, update: {}, create: { id: 13, usuarioId: 3, categoria_id: 3, nome: 'Dcarts Beleza',         descricao: 'Cosméticos selecionados para o seu dia a dia.',                       logo_url: '/uploads/lojas/dcarts&basketsMercado.png'} }),
+    prisma.lojas.upsert({ where: { id: 8  }, update: {}, create: { id: 8,  usuarioId: 3, categoria_id: 3, nome: 'Creamy Skincare',descricao: 'Cuidados para a pele com produtos selecionados e de qualidade.',     logo_url: '/uploads/lojas/CreamySkincareBeleza.png', banner_url: bannerBeleza } }),
+    prisma.lojas.upsert({ where: { id: 9  }, update: {}, create: { id: 9,  usuarioId: 4, categoria_id: 3, nome: 'Nalu',           descricao: 'Skincare e maquiagem para realçar sua beleza natural.',              logo_url: '/uploads/lojas/naluBeleza.png',           banner_url: bannerBeleza } }),
+    prisma.lojas.upsert({ where: { id: 10 }, update: {}, create: { id: 10, usuarioId: 5, categoria_id: 3, nome: 'Rare Beauty',    descricao: 'Maquiagens inclusivas e de alta qualidade para todos os tons de pele.', logo_url: '/uploads/lojas/RareBeatyBeleza.png',      banner_url: bannerBeleza } }),
+    prisma.lojas.upsert({ where: { id: 11 }, update: {}, create: { id: 11, usuarioId: 1, categoria_id: 3, nome: 'Roots',          descricao: 'Produtos de beleza naturais com foco em ingredientes sustentáveis.',  logo_url: '/uploads/lojas/rootsBeleza.png',          banner_url: bannerBeleza } }),
+    prisma.lojas.upsert({ where: { id: 12 }, update: {}, create: { id: 12, usuarioId: 2, categoria_id: 3, nome: 'Rose',           descricao: 'Maquiagem e cuidados pessoais com entrega para todo o Brasil.',       logo_url: '/uploads/lojas/RoseBeleza.png',           banner_url: bannerBeleza } }),
+    prisma.lojas.upsert({ where: { id: 13 }, update: {}, create: { id: 13, usuarioId: 3, categoria_id: 3, nome: 'Dcarts',         descricao: 'Cosméticos selecionados para o seu dia a dia.',                       logo_url: '/uploads/lojas/dcarts&basketsMercado.png',banner_url: bannerBeleza } }),
     // Moda
-    prisma.lojas.upsert({ where: { id: 14 }, update: {}, create: { id: 14, usuarioId: 4, categoria_id: 4, nome: 'Amoca Moda',            descricao: 'Roupas e acessórios com estilo para todas as ocasiões.',              logo_url: '/uploads/lojas/AmocaModa.png'            } }),
-    prisma.lojas.upsert({ where: { id: 15 }, update: {}, create: { id: 15, usuarioId: 5, categoria_id: 4, nome: 'Amore Casa Moda',       descricao: 'Moda confortável e elegante para o seu dia a dia.',                   logo_url: '/uploads/lojas/AmoreCasa.png'            } }),
-    prisma.lojas.upsert({ where: { id: 16 }, update: {}, create: { id: 16, usuarioId: 1, categoria_id: 4, nome: 'Bel Moda',              descricao: 'Tendências de moda com preços acessíveis.',                          logo_url: '/uploads/lojas/belmoda.png'              } }),
-    prisma.lojas.upsert({ where: { id: 17 }, update: {}, create: { id: 17, usuarioId: 2, categoria_id: 4, nome: 'Melina Couture Moda',   descricao: 'Peças exclusivas com acabamento refinado.',                          logo_url: '/uploads/lojas/MelinaCoutureModa.png'    } }),
-    prisma.lojas.upsert({ where: { id: 18 }, update: {}, create: { id: 18, usuarioId: 3, categoria_id: 4, nome: 'Sneaker Store Moda',    descricao: 'Os melhores tênis e calçados para todos os estilos.',                 logo_url: '/uploads/lojas/sneakerStoreModa.png'     } }),
+    prisma.lojas.upsert({ where: { id: 14 }, update: {}, create: { id: 14, usuarioId: 4, categoria_id: 4, nome: 'Amoca',          descricao: 'Roupas e acessórios com estilo para todas as ocasiões.',              logo_url: '/uploads/lojas/AmocaModa.png',            banner_url: bannerModa } }),
+    prisma.lojas.upsert({ where: { id: 15 }, update: {}, create: { id: 15, usuarioId: 5, categoria_id: 4, nome: 'Amore Casa',     descricao: 'Moda confortável e elegante para o seu dia a dia.',                   logo_url: '/uploads/lojas/AmoreCasa.png',            banner_url: bannerModa } }),
+    prisma.lojas.upsert({ where: { id: 16 }, update: {}, create: { id: 16, usuarioId: 1, categoria_id: 4, nome: 'Bel',            descricao: 'Tendências de moda com preços acessíveis.',                          logo_url: '/uploads/lojas/belmoda.png',              banner_url: bannerModa } }),
+    prisma.lojas.upsert({ where: { id: 17 }, update: {}, create: { id: 17, usuarioId: 2, categoria_id: 4, nome: 'Melina Couture', descricao: 'Peças exclusivas com acabamento refinado.',                          logo_url: '/uploads/lojas/MelinaCoutureModa.png',    banner_url: bannerModa } }),
+    prisma.lojas.upsert({ where: { id: 18 }, update: {}, create: { id: 18, usuarioId: 3, categoria_id: 4, nome: 'Sneaker Store',  descricao: 'Os melhores tênis e calçados para todos os estilos.',                 logo_url: '/uploads/lojas/sneakerStoreModa.png',     banner_url: bannerModa } }),
     // Eletrônicos
-    prisma.lojas.upsert({ where: { id: 19 }, update: {}, create: { id: 19, usuarioId: 4, categoria_id: 5, nome: 'Electree Eletrônicos',  descricao: 'TVs, monitores e eletrônicos com garantia e bom preço.',              logo_url: '/uploads/lojas/electreeEletronicos.png'  } }),
-    prisma.lojas.upsert({ where: { id: 20 }, update: {}, create: { id: 20, usuarioId: 5, categoria_id: 5, nome: 'Nako Eletrônicos',      descricao: 'Celulares e acessórios tech para todos os gostos.',                   logo_url: '/uploads/lojas/nakoEletronicos.png'      } }),
-    prisma.lojas.upsert({ where: { id: 21 }, update: {}, create: { id: 21, usuarioId: 1, categoria_id: 5, nome: 'Repiit Eletrônicos',    descricao: 'Smartphones e acessórios das melhores marcas.',                       logo_url: '/uploads/lojas/repiitEletronicos.png'    } }),
-    prisma.lojas.upsert({ where: { id: 22 }, update: {}, create: { id: 22, usuarioId: 2, categoria_id: 5, nome: 'Think Digital',         descricao: 'Notebooks e periféricos para trabalho e estudo.',                     logo_url: '/uploads/lojas/ThinkDigitalEletronicos.png'} }),
-    prisma.lojas.upsert({ where: { id: 23 }, update: {}, create: { id: 23, usuarioId: 3, categoria_id: 5, nome: 'Level Up Tecnologia',   descricao: 'Tecnologia de ponta para o seu dia a dia.',                           logo_url: '/uploads/lojas/LevelUpTecnologia.png'    } }),
+    prisma.lojas.upsert({ where: { id: 19 }, update: {}, create: { id: 19, usuarioId: 4, categoria_id: 5, nome: 'Electree',       descricao: 'TVs, monitores e eletrônicos com garantia e bom preço.',              logo_url: '/uploads/lojas/electreeEletronicos.png',  banner_url: bannerEletronicos } }),
+    prisma.lojas.upsert({ where: { id: 20 }, update: {}, create: { id: 20, usuarioId: 5, categoria_id: 5, nome: 'Nako',           descricao: 'Celulares e acessórios tech para todos os gostos.',                   logo_url: '/uploads/lojas/nakoEletronicos.png',      banner_url: bannerEletronicos } }),
+    prisma.lojas.upsert({ where: { id: 21 }, update: {}, create: { id: 21, usuarioId: 1, categoria_id: 5, nome: 'Repiit',         descricao: 'Smartphones e acessórios das melhores marcas.',                       logo_url: '/uploads/lojas/repiitEletronicos.png',    banner_url: bannerEletronicos } }),
+    prisma.lojas.upsert({ where: { id: 22 }, update: {}, create: { id: 22, usuarioId: 2, categoria_id: 5, nome: 'Think Digital',  descricao: 'Notebooks e periféricos para trabalho e estudo.',                     logo_url: '/uploads/lojas/ThinkDigitalEletronicos.png', banner_url: bannerEletronicos } }),
+    prisma.lojas.upsert({ where: { id: 23 }, update: {}, create: { id: 23, usuarioId: 3, categoria_id: 5, nome: 'Level Up',       descricao: 'Tecnologia de ponta para o seu dia a dia.',                           logo_url: '/uploads/lojas/LevelUpTecnologia.png',    banner_url: bannerEletronicos } }),
     // Jogos
-    prisma.lojas.upsert({ where: { id: 24 }, update: {}, create: { id: 24, usuarioId: 4, categoria_id: 6, nome: 'Magic Chicken Jogos',   descricao: 'Consoles, jogos e periféricos para gamers de todos os níveis.',       logo_url: '/uploads/lojas/MagicChickenJogos.png'    } }),
+    prisma.lojas.upsert({ where: { id: 24 }, update: {}, create: { id: 24, usuarioId: 4, categoria_id: 6, nome: 'Magic Chicken',  descricao: 'Consoles, jogos e periféricos para gamers de todos os níveis.',       logo_url: '/uploads/lojas/MagicChickenJogos.png',    banner_url: bannerJogos } }),
     // Brinquedos
-    prisma.lojas.upsert({ where: { id: 25 }, update: {}, create: { id: 25, usuarioId: 5, categoria_id: 7, nome: 'Kuby Brinquedos',       descricao: 'Brinquedos educativos e divertidos para todas as idades.',            logo_url: '/uploads/lojas/kubyBrinquedos.png'       } }),
-    prisma.lojas.upsert({ where: { id: 26 }, update: {}, create: { id: 26, usuarioId: 1, categoria_id: 7, nome: 'PopIrinc Brinquedos',   descricao: 'Diversão garantida com brinquedos de qualidade.',                     logo_url: '/uploads/lojas/PoplrincBrinquedos.png'   } }),
+    prisma.lojas.upsert({ where: { id: 25 }, update: {}, create: { id: 25, usuarioId: 5, categoria_id: 7, nome: 'Kuby',          descricao: 'Brinquedos educativos e divertidos para todas as idades.',            logo_url: '/uploads/lojas/kubyBrinquedos.png',       banner_url: bannerBrinquedos } }),
+    prisma.lojas.upsert({ where: { id: 26 }, update: {}, create: { id: 26, usuarioId: 1, categoria_id: 7, nome: 'PopIrinc',      descricao: 'Diversão garantida com brinquedos de qualidade.',                     logo_url: '/uploads/lojas/PoplrincBrinquedos.png',   banner_url: bannerBrinquedos } }),
     // Casa
-    prisma.lojas.upsert({ where: { id: 27 }, update: {}, create: { id: 27, usuarioId: 2, categoria_id: 8, nome: 'Fluffy House Casa',     descricao: 'Decoração e itens para deixar sua casa mais aconchegante.',           logo_url: '/uploads/lojas/fluffyHouseCasa.png'      } }),
-    prisma.lojas.upsert({ where: { id: 28 }, update: {}, create: { id: 28, usuarioId: 3, categoria_id: 8, nome: 'Mini Reno Casa',        descricao: 'Móveis e itens de cozinha para renovar seu lar.',                     logo_url: '/uploads/lojas/miniRenoCasa.png'         } }),
-    prisma.lojas.upsert({ where: { id: 29 }, update: {}, create: { id: 29, usuarioId: 4, categoria_id: 8, nome: 'Whiskers Mercado Casa', descricao: 'Tudo para casa em um só lugar, com qualidade e bom preço.',           logo_url: '/uploads/lojas/WhiskersMercado.png'      } }),
+    prisma.lojas.upsert({ where: { id: 27 }, update: {}, create: { id: 27, usuarioId: 2, categoria_id: 8, nome: 'Fluffy House',  descricao: 'Decoração e itens para deixar sua casa mais aconchegante.',           logo_url: '/uploads/lojas/fluffyHouseCasa.png',      banner_url: bannerCasa } }),
+    prisma.lojas.upsert({ where: { id: 28 }, update: {}, create: { id: 28, usuarioId: 3, categoria_id: 8, nome: 'Mini Reno',     descricao: 'Móveis e itens de cozinha para renovar seu lar.',                     logo_url: '/uploads/lojas/miniRenoCasa.png',         banner_url: bannerCasa } }),
+    prisma.lojas.upsert({ where: { id: 29 }, update: {}, create: { id: 29, usuarioId: 4, categoria_id: 8, nome: 'Whiskers',      descricao: 'Tudo para casa em um só lugar, com qualidade e bom preço.',           logo_url: '/uploads/lojas/WhiskersMercado.png',      banner_url: bannerCasa } }),
   ])
   console.log('✅ Lojas criadas')
  
@@ -241,6 +250,7 @@ async function main() {
         loja_id: p.loja_id,
         categoria_id: p.categoria_id,
         nome: p.nome,
+        descricao: p.descricao,
         preco: p.preco,
         estoque: p.estoque,
         imagens_produto: {
