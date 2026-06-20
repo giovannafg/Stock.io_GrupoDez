@@ -32,4 +32,18 @@ export class UploadController {
   uploadFotoPerfil(@UploadedFile() file: Express.Multer.File) {
     return { url: `/uploads/fotos-perfil/${file.filename}` }
   }
+
+  @Post('loja')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads/lojas',
+      filename: (req, file, cb) => {
+        const uniqueName = `${Date.now()}${extname(file.originalname)}`
+        cb(null, uniqueName)
+      }
+    })
+  }))
+  uploadLoja(@UploadedFile() file: Express.Multer.File) {
+    return { url: `/uploads/lojas/${file.filename}` }
+  }
 }

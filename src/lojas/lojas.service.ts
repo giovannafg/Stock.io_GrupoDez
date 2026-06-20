@@ -145,6 +145,7 @@ export class LojasService {
       },
       data: {
         nome: updateLojaDTO.nome,
+        categoria_id: updateLojaDTO.categoria_id,
         descricao: updateLojaDTO.descricao,
         logo_url: updateLojaDTO.logo_url,
         banner_url: updateLojaDTO.banner_url,
@@ -179,10 +180,80 @@ export class LojasService {
       );
     }
 
-    const deletedLoja = await this.prismaService.lojas.delete({
+    const produtos = await this.prismaService.produtos.findMany({
       where: {
-        id: id,
+        loja_id: id,
       },
+      select: {
+        id: true,
+      },
+    });
+    const produtoIds = produtos.map((produto) => produto.id);
+
+    const avaliacoesLoja = await this.prismaService.avaliacoes_loja.findMany({
+      where: {
+        loja_id: id,
+      },
+      select: {
+        id: true,
+      },
+    });
+    const avaliacaoLojaIds = avaliacoesLoja.map((avaliacao) => avaliacao.id);
+
+    const deletedLoja = await this.prismaService.$transaction(async (tx) => {
+      if (avaliacaoLojaIds.length > 0) {
+        await tx.comentarios_avaliacao.deleteMany({
+          where: {
+            avaliacao_loja_id: {
+              in: avaliacaoLojaIds,
+            },
+          },
+        });
+      }
+
+      if (produtoIds.length > 0) {
+        await tx.comentarios_avaliacao.deleteMany({
+          where: {
+            avaliacao_produto_id: {
+              in: produtoIds,
+            },
+          },
+        });
+
+        await tx.avaliacoes_produto.deleteMany({
+          where: {
+            produto_id: {
+              in: produtoIds,
+            },
+          },
+        });
+
+        await tx.imagens_produto.deleteMany({
+          where: {
+            produto_id: {
+              in: produtoIds,
+            },
+          },
+        });
+
+        await tx.produtos.deleteMany({
+          where: {
+            loja_id: id,
+          },
+        });
+      }
+
+      await tx.avaliacoes_loja.deleteMany({
+        where: {
+          loja_id: id,
+        },
+      });
+
+      return tx.lojas.delete({
+        where: {
+          id: id,
+        },
+      });
     });
 
     return deletedLoja;
@@ -196,6 +267,7 @@ export class LojasService {
       include: {
         usuario: true,
         produtos: true,
+        categoria: true,
       },
     });
 
@@ -203,6 +275,7 @@ export class LojasService {
       id: loja.id,
       nome: loja.nome,
       logo: loja.logo_url,
+      categoria: loja.categoria?.nome || 'Sem categoria',
     }));
   }
 }
