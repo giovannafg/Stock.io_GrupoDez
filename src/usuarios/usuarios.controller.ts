@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Req, UseGuards } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreatUsuariosDTO } from './dto/creat-usuarios.dto';
 import { UpdateUsuariosDto } from './dto/update-usuarios.dro';
@@ -7,6 +7,7 @@ import type { Request } from 'express';
 import { REQUEST_TOKEN_PAYLOAD_NAME } from '../autenticacao/commom/autenticacao.constants';
 import { TokenPayloadParam } from '../autenticacao/param/token-payload.param';
 import { PayloadTokenDto } from '../autenticacao/dto/payload-token.dto';
+import { AlterarSenhaDTO } from './dto/alterar-senha.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -34,13 +35,29 @@ export class UsuariosController {
     @TokenPayloadParam() tokenPayload: PayloadTokenDto
     ){
         // console.log('pauload:' , tokenPayload)
+        console.log("entrei aq")
+        return this.usuariosService.update(Number(id), updateUser, tokenPayload)
+    }
 
+    @UseGuards(AutenticacaoGuard)
+    @Put("/:id")
+    updateByIdPut(@Param('id')id:string, @Body() updateUser : UpdateUsuariosDto,
+    @TokenPayloadParam() tokenPayload: PayloadTokenDto
+    ){
         return this.usuariosService.update(Number(id), updateUser, tokenPayload)
     }
 
     @Delete("/:id")
     deleteById(@Param('id')id:string){
         return this.usuariosService.delete(Number(id))
+    }
+
+    @UseGuards(AutenticacaoGuard)
+    @Patch("/senha/:id")
+    updateSenha(@Param('id')id:string, @Body() alterarSenha: AlterarSenhaDTO,
+    @TokenPayloadParam() tokenPayload: PayloadTokenDto
+    ){
+        return this.usuariosService.updateSenha(Number(id), alterarSenha, tokenPayload)
     }
 
 }

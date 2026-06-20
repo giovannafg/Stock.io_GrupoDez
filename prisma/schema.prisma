@@ -38,6 +38,8 @@ model Lojas{
   nome String @db.VarChar(255)
   usuarioId Int
   usuario Usuarios @relation(fields: [usuarioId], references: [id])
+  categoria_id Int
+  categoria Categorias @relation(fields: [categoria_id], references: [id])
   descricao String? @db.Text
   logo_url String? @db.VarChar(255)
   banner_url String? @db.VarChar(255)
@@ -57,6 +59,7 @@ model Categorias{
   nome String @db.VarChar(100)
   categoria_pai_id Int?
 
+  lojas Lojas[]
   categoria_pai  Categorias?  @relation("CategoriaHierarquia", fields: [categoria_pai_id], references: [id])
   subcategorias  Categorias[] @relation("CategoriaHierarquia")
 
