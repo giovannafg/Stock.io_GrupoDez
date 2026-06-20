@@ -26,7 +26,11 @@ export class ProdutosService {
       where,
       include: {
         loja: true,
-        categoria: true,
+        categoria: {
+          include: {
+            categoria_pai: true,
+          },
+        },
         imagens_produto: true,
         avaliacoes_produto: true,
       },
