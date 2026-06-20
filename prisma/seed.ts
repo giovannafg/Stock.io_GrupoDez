@@ -132,10 +132,8 @@ async function main() {
     { id: 3,  loja_id: 20, categoria_id: 21, nome: 'iPhone 16',         descricao: 'O mais novo iPhone, com desempenho e câmera aprimorados.', preco: 5999.99,  estoque: 2,  imagem: '/uploads/produtos/iphone16.png'        },
     { id: 4,  loja_id: 20, categoria_id: 21, nome: 'Samsung S25 Ultra', descricao: 'Samsung Galaxy S25 Ultra, topo de linha com S Pen.',       preco: 5769.10,  estoque: 4,  imagem: '/uploads/produtos/S25Ultra.png'        },
     { id: 5,  loja_id: 22, categoria_id: 21, nome: 'Samsung Z Fold',    descricao: 'Smartphone dobrável da Samsung, tela grande e versátil.', preco: 8999.99,  estoque: 1,  imagem: '/uploads/produtos/samsungzFold.png'    },
-    { id: 6,  loja_id: 21, categoria_id: 21, nome: 'iPhone 3',          descricao: 'Modelo retrô do iPhone, ideal para coleção.',              preco: 499.99,   estoque: 4,  imagem: '/uploads/produtos/iphone3.png'         },
     { id: 7,  loja_id: 20, categoria_id: 21, nome: 'iPhone 15 (Roxo)',  descricao: 'Apple iPhone 15 na cor roxa, edição especial.',            preco: 4899.99,  estoque: 3,  imagem: '/uploads/produtos/iphone152.png'       },
     // Notebooks (22)
-    { id: 8,  loja_id: 23, categoria_id: 22, nome: 'Macbook',           descricao: 'Apple Macbook Air, leve e potente para o dia a dia.',     preco: 15899.99, estoque: 2,  imagem: '/uploads/produtos/macbook.png'         },
     { id: 9,  loja_id: 22, categoria_id: 22, nome: 'Notebook Lenovo',   descricao: 'Lenovo IdeaPad, ótimo custo-benefício para uso geral.',    preco: 3899.99,  estoque: 5,  imagem: '/uploads/produtos/notebookLenovo.png'  },
     { id: 10, loja_id: 23, categoria_id: 22, nome: 'Samsung Book',      descricao: 'Notebook Samsung Book, design fino e bateria de longa duração.', preco: 4599.99, estoque: 3,  imagem: '/uploads/produtos/samsungbook.png'     },
     { id: 11, loja_id: 23, categoria_id: 22, nome: 'Macbook Pro',       descricao: 'Apple Macbook Pro, ideal para tarefas pesadas e edição.',  preco: 18999.99, estoque: 2,  imagem: '/uploads/produtos/macbook2.png'        },
@@ -152,9 +150,6 @@ async function main() {
     { id: 20, loja_id: 23, categoria_id: 24, nome: 'Cabo HDMI',         descricao: 'Cabo HDMI de alta velocidade, ideal para TVs e monitores.', preco: 49.99,  estoque: 20, imagem: '/uploads/produtos/caboHDMI.png'        },
     { id: 21, loja_id: 20, categoria_id: 24, nome: 'Mouse Multilaser',  descricao: 'Mouse sem fio com sensor de precisão.',                   preco: 129.99,  estoque: 10, imagem: '/uploads/produtos/mouseMultilaser.png' },
     { id: 22, loja_id: 19, categoria_id: 24, nome: 'Mouse Teclado',     descricao: 'Combo mouse e teclado para escritório e estudo.',         preco: 199.99,   estoque: 7,  imagem: '/uploads/produtos/mouseteclado.png'    },
-    { id: 23, loja_id: 21, categoria_id: 24, nome: 'iPad 11"',          descricao: 'Apple iPad 11 polegadas, ideal para estudo e trabalho.',  preco: 4299.99,  estoque: 3,  imagem: '/uploads/produtos/ipad11.png'          },
-    { id: 24, loja_id: 20, categoria_id: 24, nome: 'Smartwatch',        descricao: 'Relógio inteligente com monitoramento de saúde.',        preco: 1299.99,  estoque: 4,  imagem: '/uploads/produtos/smartwatch.png'      },
-    { id: 25, loja_id: 22, categoria_id: 24, nome: 'JBL',               descricao: 'Caixa de som JBL portátil com som potente.',              preco: 599.99,   estoque: 6,  imagem: '/uploads/produtos/jbl.png'             },
     { id: 26, loja_id: 23, categoria_id: 24, nome: 'SoundBar',          descricao: 'SoundBar para melhorar o áudio da sua TV.',               preco: 899.99,   estoque: 3,  imagem: '/uploads/produtos/SoundBar.png'        },
     { id: 27, loja_id: 22, categoria_id: 24, nome: 'Adaptador Cartão',  descricao: 'Adaptador de cartão de memória SD para notebooks.',      preco: 29.99,    estoque: 15, imagem: '/uploads/produtos/adaptadorcartaosd.png'},
     // Consoles (25)
@@ -187,17 +182,12 @@ async function main() {
     { id: 51, loja_id: 12, categoria_id: 15, nome: 'Sombra Rosa',       descricao: 'Sombra individual na cor rosa, alta pigmentação.',        preco: 44.99,    estoque: 18, imagem: '/uploads/produtos/sombrarosa.png'      },
     // Skincare (16)
     { id: 52, loja_id: 8,  categoria_id: 16, nome: 'Bruma Labial',      descricao: 'Bruma hidratante para os lábios.',                        preco: 34.99,    estoque: 20, imagem: '/uploads/produtos/BrumaLabial.png'     },
-    { id: 53, loja_id: 8,  categoria_id: 16, nome: 'Creme de Mão',      descricao: 'Creme hidratante para as mãos, fórmula nutritiva.',       preco: 29.99,    estoque: 25, imagem: '/uploads/produtos/cremedemao.png'      },
     { id: 54, loja_id: 9,  categoria_id: 16, nome: 'Creme Rare Beauty',descricao: 'Creme hidratante facial da linha Rare Beauty.',            preco: 89.99,    estoque: 10, imagem: '/uploads/produtos/cremeRareBeaty.png'  },
     { id: 55, loja_id: 8,  categoria_id: 16, nome: 'Gel Banho',         descricao: 'Gel de banho hidratante com fragrância suave.',           preco: 39.99,    estoque: 0, imagem: '/uploads/produtos/geldebanho.png'      },
-    { id: 56, loja_id: 9,  categoria_id: 16, nome: 'Gel Perfumado',     descricao: 'Gel corporal perfumado de longa duração.',                preco: 49.99,    estoque: 15, imagem: '/uploads/produtos/GelPerfumado.png'    },
     { id: 57, loja_id: 8,  categoria_id: 16, nome: 'Gloss Marrom',      descricao: 'Gloss labial na cor marrom, brilho intenso.',             preco: 34.99,    estoque: 22, imagem: '/uploads/produtos/glossmarrom.png'     },
     { id: 58, loja_id: 9,  categoria_id: 16, nome: 'Gloss Rare Beauty',descricao: 'Gloss labial hidratante da linha Rare Beauty.',            preco: 44.99,    estoque: 16, imagem: '/uploads/produtos/glossRareBeaty.png'  },
     { id: 59, loja_id: 8,  categoria_id: 16, nome: 'Gloss Vinho',       descricao: 'Gloss labial na cor vinho, acabamento brilhante.',        preco: 34.99,    estoque: 20, imagem: '/uploads/produtos/glossvinh9o.png'     },
-    { id: 60, loja_id: 9,  categoria_id: 16, nome: 'Lápis Labial',      descricao: 'Lápis labial de alta fixação, várias cores.',             preco: 24.99,    estoque: 30, imagem: '/uploads/produtos/lapis labial.png'    },
-    // Perfumes (17)
-    { id: 61, loja_id: 11, categoria_id: 17, nome: 'Perfume Rare Beauty',descricao: 'Perfume floral da linha Rare Beauty, fragrância marcante.', preco: 299.99, estoque: 8,  imagem: '/uploads/produtos/perfumeRare.png'     },
-    // Casa - Decoração (31)
+     // Casa - Decoração (31)
     { id: 62, loja_id: 27, categoria_id: 31, nome: 'Vitrola Vintage',   descricao: 'Vitrola estilo retrô para tocar seus discos favoritos.',  preco: 899.99,   estoque: 3,  imagem: '/uploads/produtos/vitrolavintage.png'  },
  
     // ===== NOVOS PRODUTOS =====
@@ -239,9 +229,23 @@ async function main() {
     // Casa - Cozinha (33)
     { id: 81, loja_id: 28, categoria_id: 33, nome: 'Panela de Pressão',descricao: 'Panela de pressão de alta durabilidade.',                  preco: 179.99,   estoque: 8,  imagem: '/uploads/produtos/paneladepressao.png' },
     { id: 82, loja_id: 28, categoria_id: 33, nome: 'Conjunto de Talheres',descricao: 'Conjunto de talheres em aço inox para 6 pessoas.',      preco: 99.99,    estoque: 14, imagem: '/uploads/produtos/conjuntotalher.png'  },
+  
+    //prdotuos com 4 fotos
+    { id: 8,  loja_id: 23, categoria_id: 22, nome: 'Macbook', descricao: 'Apple Macbook Air, leve e potente para o dia a dia.', preco: 15899.99, estoque: 2, imagens: [ '/uploads/produtos/macbook1.png', '/uploads/produtos/macbook2.png', '/uploads/produtos/macbook3.png', '/uploads/produtos/macbook4.png'] },
+    { id: 23, loja_id: 21, categoria_id: 24, nome: 'iPad 11"', descricao: 'Apple iPad 11 polegadas, ideal para estudo e trabalho.', preco: 4299.99, estoque: 3, imagens: [ '/uploads/produtos/ipad1.png', '/uploads/produtos/ipad2.png', '/uploads/produtos/ipad3.png'] },
+    { id: 24, loja_id: 20, categoria_id: 24, nome: 'Smartwatch', descricao: 'Relógio inteligente com monitoramento de saúde.', preco: 1299.99, estoque: 4, imagens: ['/uploads/produtos/smartwatch1.png', '/uploads/produtos/smartwatch2.png', '/uploads/produtos/smartwatch3.png', '/uploads/produtos/smartwatch4.png'] },
+    { id: 25, loja_id: 22, categoria_id: 24, nome: 'JBL', descricao: 'Caixa de som JBL portátil com som potente.', preco: 599.99, estoque: 6, imagens: [ '/uploads/produtos/jbl1.png', '/uploads/produtos/jbl2.png', '/uploads/produtos/jbl3.png', '/uploads/produtos/jbl4.png'] },
+
+    { id: 53, loja_id: 8,  categoria_id: 16, nome: 'Creme de Mão',      descricao: 'Creme hidratante para as mãos, fórmula nutritiva.',       preco: 29.99,    estoque: 25, imagens: ['/uploads/produtos/cremedemaorarebeaty1.png', '/uploads/produtos/cremedemaorarebeaty2.png', '/uploads/produtos/cremedemaorarebeaty3.png'] },
+    { id: 56, loja_id: 9,  categoria_id: 16, nome: 'Gel Perfumado',     descricao: 'Gel corporal perfumado de longa duração.',                preco: 49.99,    estoque: 15, imagens: ['/uploads/produtos/gelperfumado1.png', '/uploads/produtos/gelperfumado2.png', '/uploads/produtos/gelperfumado3.png', '/uploads/produtos/gelperfumado4.png'] },
+    { id: 60, loja_id: 9,  categoria_id: 16, nome: 'Lápis Labial',      descricao: 'Lápis labial de alta fixação, várias cores.',             preco: 24.99,    estoque: 30, imagens: ['/uploads/produtos/lapisdebocararebeaty1.png', '/uploads/produtos/lapisdebocararebeaty2.png', '/uploads/produtos/lapisdebocararebeaty3.png', '/uploads/produtos/lapisdebocararebeaty4.png'] },
+    { id: 61, loja_id: 11, categoria_id: 17, nome: 'Perfume Rare Beauty',descricao: 'Perfume floral da linha Rare Beauty, fragrância marcante.', preco: 299.99, estoque: 8,  imagens: ['/uploads/produtos/perfumerarebeaty1.png', '/uploads/produtos/perfumerarebeaty2.png', '/uploads/produtos/perfumerarebeaty3.png'] },
+
   ]
 
   for (const p of produtos) {
+    const listaImagens: string[] = (p as any).imagens ?? [(p as any).imagem]
+
     await prisma.produtos.upsert({
       where: { id: p.id },
       update: {},
@@ -254,7 +258,7 @@ async function main() {
         preco: p.preco,
         estoque: p.estoque,
         imagens_produto: {
-          create: [{ url_imagem: p.imagem, ordem: 1 }]
+          create: listaImagens.map((url, index) => ({ url_imagem: url, ordem: index + 1 }))
         }
       }
     })
